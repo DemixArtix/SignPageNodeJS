@@ -1,4 +1,7 @@
 const express = require('express');
+const https = require('https');
+const path = require('path');
+const fs = require('fs');
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -35,6 +38,20 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 require('./middleware/passport')(passport);
 
+//
+// const sslServer = https.createServer({
+//   key: fs.readFileSync(path.join(__dirname, 'cert', 'key.pem')),
+//   cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem')),
+// }, app);
+//
+//
+// sslServer.listen(port, function (err) {
+//   if (err) {
+//     return console.log('something bad happened', err)
+//   }
+//
+//   console.log('node express work on ' + port);
+// });
 
 app.listen(port, function (err) {
   if (err) {
